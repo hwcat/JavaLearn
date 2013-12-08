@@ -5,6 +5,10 @@
 	<artifactId>mybatisMysql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<properties>
+		<cxf.version>2.6.8</cxf.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -56,20 +60,67 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>3.2.5.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+	<!-- 	<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-ports-http</artifactId>
+			<version>${cxf.version}</version>
+		</dependency> -->
+		<!-- Jetty is needed if you're are not using the CXFServlet -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-servlet_2.5_spec</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-tools-common</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-tools-java2ws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-tools-validator</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-tools-wsdlto-core</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-tools-wsdlto-databinding-jaxb</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
 
 	</dependencies>
 	<build>
 		<plugins>
-			  <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.1</version>
-                <configuration>
-                    <port>9090</port>
-                    <path>/catWs</path>
-                    <uriEncoding>UTF-8</uriEncoding>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<port>9090</port>
+					<path>/catWs</path>
+					<uriEncoding>UTF-8</uriEncoding>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
