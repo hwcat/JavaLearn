@@ -3,7 +3,7 @@ package com.wzj.test.mybatis.mysql.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Student implements Serializable{
+public class StudentBean implements Serializable{
     private static final long serialVersionUID = -7255758731320028542L;
 
     private int ID;
@@ -96,7 +96,7 @@ public class Student implements Serializable{
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
-        Student other = (Student) obj;
+        StudentBean other = (StudentBean) obj;
         if (ID != other.ID) return false;
         if (description == null) {
             if (other.description != null) return false;

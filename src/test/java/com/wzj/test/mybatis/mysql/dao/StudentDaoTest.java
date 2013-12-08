@@ -10,9 +10,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.wzj.test.mybatis.mysql.entity.Student;
-
+import com.wzj.test.mybatis.mysql.entity.StudentBean;
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:spring/applicationContext.xml")
 public class StudentDaoTest {
     @Test
     public void testAdd() throws IOException {
@@ -28,7 +32,7 @@ public class StudentDaoTest {
         System.out.println("add students success.");
         List<String> IDs = new ArrayList<String>();
         IDs.add("1432");
-        List<Student> students = studentDao.getStudents(IDs);
+        List<StudentBean> students = studentDao.getStudents(IDs);
         System.out.println(students.size());
 
         session.commit();
@@ -60,7 +64,7 @@ public class StudentDaoTest {
         
         SqlSession session = factory.openSession();
         
-        Student student = new Student();
+        StudentBean student = new StudentBean();
         student.setDescription("He is a bad student.");
         student.setID(1432);
         session.update("updateStudent", student);
@@ -77,7 +81,7 @@ public class StudentDaoTest {
         SqlSessionFactory factory = builder.build(reader);
         
         SqlSession session = factory.openSession();
-        Student student = new Student();
+        StudentBean student = new StudentBean();
         student.setID(1432);
         student.setDescription("the student is good.");
 
@@ -85,9 +89,9 @@ public class StudentDaoTest {
         dao.updateStudent(student);
     }
 
-    private List<Student> getStudents() {
-        List<Student> students = new ArrayList<Student>();
-        Student student = new Student();
+    private List<StudentBean> getStudents() {
+        List<StudentBean> students = new ArrayList<StudentBean>();
+        StudentBean student = new StudentBean();
         
         student.setDescription("the student is good.");
         student.setEntranceDate(new Date());

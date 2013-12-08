@@ -2,14 +2,14 @@ package com.wzj.test.mybatis.mysql.dao;
 
 import java.util.List;
 
-import com.wzj.test.mybatis.mysql.entity.Student;
+import com.wzj.test.mybatis.mysql.entity.StudentBean;
 
 public interface StudentDao {
-    public void addStudents(List<Student> student);
+    public void addStudents(List<StudentBean> student);
     
-    public void updateStudent(Student student);
+    public void updateStudent(StudentBean student);
     
-    public List<Student> getStudents(List<String> IDs);
+    public List<StudentBean> getStudents(List<String> IDs);
     
     public void deleteStudents(List<String> IDs);
 }
