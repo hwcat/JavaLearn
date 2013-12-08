@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzj.test.mybatis.mysql.dao.StudentDao">
+
+	<insert id="addStudents" parameterType="com.wzj.test.mybatis.mysql.entity.Student">
+		insert into t_student (ID, name, sex, major, tel, description)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.ID}, #{item.name, jdbcType=VARCHAR}, #{item.sex, jdbcType=CHAR}, #{item.major, jdbcType=VARCHAR}, 
+			#{item.tel, jdbcType=CHAR}, #{item.description, jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+	<update id="updateStudent" parameterType="com.wzj.test.mybatis.mysql.entity.Student">
+		update t_student t set
+			<if test="name != null and name != ''">
+				t.name = #{name},
+			</if>
+			<if test="sex != null and sex != ''">
+				t.sex = #{sex},
+			</if>	
+			<if test="major != null and major != ''">
+				t.major = #{major},
+			</if>
+			<if test="tel != null and tel != ''">
+				t.tel = #{tel},
+			</if>
+			<if test="description != null and description != ''">
+				t.description = #{description}
+			</if>
+			<where>
+				t.ID = #{ID}
+			</where>
+	</update>
+	<select id="getStudents" resultType="com.wzj.test.mybatis.mysql.entity.Student">
+		select t.ID as ID, 
+			   t.name as name,
+			   t.sex as sex,
+			   t.tel as tel,
+			   t.major as major,
+			   t.description as description,
+			   t.entrance_date as entranceDate
+		from t_student t
+		<where>
+			t.ID in
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</where>
+	</select>
+
+</mapper>
